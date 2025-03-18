@@ -11,6 +11,9 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 from pathlib import Path
+from token_key import SECRET_KEY_DJANGO
+from token_key import POSTGRESQL_ENGINE, POSTGRESQL_USER, POSTGRESQL_PASSWORD, \
+    POSTGRESQL_DATABASE, POSTGRESQL_HOST, POSTGRESQL_PORT
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -19,7 +22,6 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-from token_key import SECRET_KEY_DJANGO
 
 SECRET_KEY = SECRET_KEY_DJANGO
 
@@ -73,10 +75,15 @@ WSGI_APPLICATION = 'Booking_System.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
+# Настройка выбранной бд PostgreSQL.
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': POSTGRESQL_ENGINE,  # Ключ для работы с выбранной бд.
+        'NAME': POSTGRESQL_DATABASE,  # Имя вашей бд.
+        'USER': POSTGRESQL_USER,  # Ваше имя пользователя.
+        'PASSWORD': POSTGRESQL_PASSWORD,  # Ваш пароль.
+        'HOST': POSTGRESQL_HOST,  # Порт или укажите IP-адрес сервера бд.
+        'PORT': POSTGRESQL_PORT,  # Стандартный порт бд.
     }
 }
 
@@ -101,9 +108,10 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/5.1/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+# Замена языка отображения и часового пояса.
+LANGUAGE_CODE = 'ru'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Etc/GMT-3'
 
 USE_I18N = True
 
