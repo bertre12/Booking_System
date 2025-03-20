@@ -3,8 +3,9 @@ from django.db import models
 
 # Создание модели(таблицы).
 class Hotel(models.Model):
-    name = models.TextField(blank=True, null=True, verbose_name='Название')
-    price = models.IntegerField(blank=True, null=True, verbose_name='Цена')
+    name = models.CharField(max_length=100, blank=True,
+                            null=True, verbose_name='Название')
+    price = models.FloatField(blank=True, null=True, verbose_name='Цена')
     description = models.TextField(blank=True, null=True,
                                    verbose_name='Описание')
 
