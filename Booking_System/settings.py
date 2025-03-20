@@ -11,9 +11,11 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 from pathlib import Path
-from token_key import SECRET_KEY_DJANGO
-from token_key import POSTGRESQL_ENGINE, POSTGRESQL_USER, POSTGRESQL_PASSWORD, \
-    POSTGRESQL_DATABASE, POSTGRESQL_HOST, POSTGRESQL_PORT
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -23,7 +25,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 
-SECRET_KEY = SECRET_KEY_DJANGO
+SECRET_KEY = os.getenv('SECRET_KEY_DJANGO')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -79,12 +81,12 @@ WSGI_APPLICATION = 'Booking_System.wsgi.application'
 # Настройка выбранной бд PostgreSQL.
 DATABASES = {
     'default': {
-        'ENGINE': POSTGRESQL_ENGINE,  # Ключ для работы с выбранной бд.
-        'NAME': POSTGRESQL_DATABASE,  # Имя вашей бд.
-        'USER': POSTGRESQL_USER,  # Ваше имя пользователя.
-        'PASSWORD': POSTGRESQL_PASSWORD,  # Ваш пароль.
-        'HOST': POSTGRESQL_HOST,  # Порт или укажите IP-адрес сервера бд.
-        'PORT': POSTGRESQL_PORT,  # Стандартный порт бд.
+        'ENGINE': os.getenv('POSTGRESQL_ENGINE'),  # Ключ для работы с выбранной бд.
+        'NAME': os.getenv('POSTGRESQL_DATABASE'),  # Имя вашей бд.
+        'USER': os.getenv('POSTGRESQL_USER'),  # Ваше имя пользователя.
+        'PASSWORD': os.getenv('POSTGRESQL_PASSWORD'),  # Ваш пароль.
+        'HOST': os.getenv('POSTGRESQL_HOST'),  # Порт или укажите IP-адрес сервера бд.
+        'PORT': os.getenv('POSTGRESQL_PORT'),  # Стандартный порт бд.
     }
 }
 
